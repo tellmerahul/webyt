@@ -12,6 +12,31 @@ export default function Page() {
   const [debouncedSearchTerm, setDebouncedSearchTerm] = useState("");
   const [loading, setLoading] = useState(true);
   const [id, setId] = useState("");
+  // In your [channel]/page.jsx
+useEffect(() => {
+  const fetchData = async () => {
+    const url = window.location.hostname;
+    console.log("Current hostname:", url);
+    console.log("Base domain:", process.env.NEXT_PUBLIC_BASE_DOMAIN);
+    console.log("Full base domain:", process.env.NEXT_PUBLIC_FULL_BASE_DOMAIN);
+    await fetchID(url.split(".")[0]);
+  };
+  fetchData();
+}, []);
+
+async function fetchID(name) {
+  try {
+    const apiUrl = `${process.env.NEXT_PUBLIC_FULL_BASE_DOMAIN}/api/user?name=${name}`;
+    console.log("Fetching from URL:", apiUrl);
+    const response = await fetch(apiUrl, {
+      method: "GET",
+    });
+    // rest of your code...
+  } catch (err) {
+    console.error("Full error:", err);
+    alert(`Error checking user in db: ${err.message}`);
+  }
+}
 
   async function fetchID(name) {
     try {
