@@ -1,10 +1,10 @@
 "use client";
 
-import { useAuth } from "@/components/auth";
+// import { useAuth } from "@/components/auth";
 import React, { useEffect, useState, useCallback, useMemo } from "react";
 
 export default function Page() {
-  const [playlistData, setPlaylistData] = useState(null);
+  const [setPlaylistData] = useState(null);
   const [videos, setVideos] = useState([]);
   const [mainVideo, setMainVideo] = useState(null);
   const [channelInfo, setChannelInfo] = useState(null);
