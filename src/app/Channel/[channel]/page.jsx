@@ -12,34 +12,7 @@ export default function Page() {
   const [debouncedSearchTerm, setDebouncedSearchTerm] = useState("");
   const [loading, setLoading] = useState(true);
   const [id, setId] = useState("");
-  async function fetchID(name) {
-    try {
-      const apiUrl = `${process.env.NEXT_PUBLIC_FULL_BASE_DOMAIN}/api/user?name=${name}`;
-      console.log("Fetching from URL:", apiUrl);
-      
-      const response = await fetch(apiUrl, {
-        method: "GET",
-      });
   
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
-  
-      const data = await response.json();
-      console.log("API Response:", data);
-  
-      if (data.success) {
-        console.log("Channel Id:", data.data.channelId);
-        setId(data.data.channelId);
-        return data.message;
-      } else {
-        throw new Error(data.message);
-      }
-    } catch (err) {
-      console.error("Full error:", err);
-      alert(`Error checking user in db: ${err.message}`);
-    }
-  }
 
   async function fetchID(name) {
     try {
