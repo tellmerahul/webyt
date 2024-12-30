@@ -14,9 +14,12 @@ export const AuthProvider = ({ children }) => {
 
     const loginAndConnect = async () => {
         const oauthEP = "https://accounts.google.com/o/oauth2/v2/auth";
+        const redirectUri = process.env.NODE_ENV === 'production' 
+        ? "https://webyt-kohl.vercel.app/api/auth/callback/google"  
+        : "http://localhost:3000/api/auth/callback/google";
         const params = new URLSearchParams({
             client_id: process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID,
-            redirect_uri: "http://localhost:3000",
+            redirect_uri: redirectUri,
             response_type: "token",
             scope: "https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/youtube.readonly",
             include_granted_scopes: "true",
